@@ -970,16 +970,16 @@ div.my-img{text-align:center;margin-top:20px}
 <h1 id="configurando-el-proyecto">Configurando el proyecto<a class="headerlink" href="#configurando-el-proyecto" title="Permanent link">&para;</a></h1>
 <p>Con el proyecto creado, el siguiente paso es realizar la configuración inicial para ponernos en marcha, pero antes vamos a hablar brevemente de esta jerarquía de ficheros que se han creado automáticamente.</p>
 <p>Dejando de banda el directorio <strong>.vscode</strong>, que crea nuestro editor, lo primero que notaréis es que la propia carpeta webpersonal contiene a su vez otra carpeta webpersonal junto a un fichero llamado <strong>manage.py</strong>. Este fichero es un script que sirve para gestionar todo nuestro proyecto desde la terminal, y lo vamos a estar utilizando un montón.</p>
-<p>Por otro lado el subdirectorio <em>webpersonal</em> es el que contiene los scripts base del proyecto, los cuales tienen toda la configuración inicial y de despliegue. </p>
-<p>Resumiendo mucho, el fichero <strong>&#95;&#95;init.py&#95;&#95;</strong> nos indica que la carpeta es un paquete, <strong>settings.py</strong> es el que contiene la configuración del proyecto, <strong>urls.py</strong> es el fichero encargado de manejar las direcciones de la web (sí esas que se escribirán en la barra del navegador) y por último <strong>wsgi.py</strong>, un script que contiene la información para desplegar el proyecto en producción, algo que trataremos en la <em>Sección 5. Despliegue</em>.</p>
+<p>Por otro lado el subdirectorio <em>webpersonal</em> es el que contiene los scripts base del proyecto, los cuales tienen toda la configuración inicial y de despliegue.</p>
+<p>Resumiendo mucho, el fichero <strong>__init.py__</strong> nos indica que la carpeta es un paquete, <strong>settings.py</strong> es el que contiene la configuración del proyecto, <strong>urls.py</strong> es el fichero encargado de manejar las direcciones de la web (sí esas que se escribirán en la barra del navegador) y por último <strong>wsgi.py</strong>, un script que contiene la información para desplegar el proyecto en producción, algo que trataremos en la <em>Sección 5. Despliegue</em>.</p>
 <div style="text-align:center;margin-top:25px"><img class="lazy" data-src="/cdn/django/03.png"/></div>
 
-<p>Creo que es mejor que descubramos sobre la marcha estos ficheros, así que por ahora vamos a centrarnos sólo en el manage. Desde Visual Studio Code, vamos abrir el directorio donde se encuentra <strong>manage.py</strong>. </p>
+<p>Creo que es mejor que descubramos sobre la marcha estos ficheros, así que por ahora vamos a centrarnos sólo en el manage. Desde Visual Studio Code, vamos abrir el directorio donde se encuentra <strong>manage.py</strong>.</p>
 <p>Lo vamos a ejecutar abriéndolo y ejecutando el script con clic derecho, de esa forma el propio Visual Studio Code nos activará el entorno virtual, es un pequeño truco.</p>
 <div style="text-align:center;margin-top:25px"><img class="lazy" data-src="/cdn/django/04.png"/></div>
 
 <p>Ahora vamos a ejecutar el script junto con el comando runserver, que significa correr o poner en marcha el servidor:</p>
-<div class="codehilite"><pre><span></span>(django2) django-admin startproject webpersonal
+<div class="codehilite"><pre><span></span>(django2) python manage.py runserver
 </pre></div>
 
 <p>Esto pondrá en marcha el servidor de desarrollo de Django y podremos acceder a la web que se ha generado haciendo clic en la dirección mientras presionamos <em>Control</em>:</p>
@@ -994,74 +994,52 @@ div.my-img{text-align:center;margin-top:20px}
 <p>¿Settings… eh? Vamos un momento a nuestro fichero settings.py. Ahí vamos a encontrar una configuración muuuy extensa, llena de variables, listas, directorios… Por ahora quedémonos con la de <strong>DEBUG = True</strong>, como véis nos indica una descripción justo encima "<em>AVISO DE SEGURIDAD: no poner en marcha con el debug en producción</em>".</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<div class="superfences-tabs">
-<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
-<label for="__tab_1_0">webpersonal/settings.py</label>
-<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="c1"># SECURITY WARNING: don&#39;t run with debug turned on in production!</span>
+</div>
+<p>```python tab="webpersonal/settings.py" # SECURITY WARNING: don't run with debug turned on in production!</p>
+<div class="codehilite"><pre><span></span>DEBUG = True
+```
+</pre></div>
 
-<span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
-</pre></div></div>
-</div>
-</div>
+
 <p>Hablemos un poco sobre esto porque es muy importante. El modo <strong>DEBUG</strong>, o en español el modo de <strong>DEPURACIÓN</strong>, es un modo de ejecución especial en el que siempre que ocurra un fallo, Django nos mostrará un montón de información para analizarla y poder solucionarlo. Óbviamente esta información es confidencial, ya que muestra valores de variables, rutas de directorios y otros datos importantes. Es por eso que en cuanto publiquemos o mejor dicho, despleguemos un proyecto de Django en Internet, lo primero que haremos siempre es desactivar el modo <strong>DEBUG</strong> poniéndolo a <em>False</em>.</p>
 <p>Otra cosa interesante de Django que os va a gustar mucho, es su interfaz viene traducida a a un montón de idiomas. Podemos cambiar el idioma por defecto cambiando la variable del fichero settings: <em>LANGUAGE_CODE</em> a <em>es</em>. Si queréis algo más específico consultad la documentación del enlace justo encima:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<div class="superfences-tabs">
-<input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
-<label for="__tab_2_0">webpersonal/settings.py</label>
-<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="c1"># Internationalization</span>
-<span class="c1"># https://docs.djangoproject.com/en/2.0/topics/i18n/</span>
+</div>
+<p>```python tab="webpersonal/settings.py" # Internationalization # https://docs.djangoproject.com/en/2.0/topics/i18n/</p>
+<div class="codehilite"><pre><span></span>LANGUAGE_CODE = &#39;es&#39;
+```
+</pre></div>
 
-<span class="n">LANGUAGE_CODE</span> <span class="o">=</span> <span class="s1">&#39;es&#39;</span>
-</pre></div></div>
-</div>
-</div>
+
 <p>Sólo habiendo hecho este cambio el servidor de Django se reiniciará aplicando los cambios, y si recargamos la pantalla de antes… ¡Sorpresa! Ahora nos sale en español:</p>
 <div style="text-align:center;margin-top:25px"><img class="lazy" data-src="/cdn/django/07.png"/></div>
 
 <p>El siguiente paso que tenemos que llevar a cabo, justo después de crear un proyecto, es crear la base de datos inicial. Lo tenemos que hacer para que Django pueda gestionar un montón de cosas por nosotros, como por ejemplo las sesiones, los usuarios o los grupos. Para hacerlo vamos de vuelta al fichero <strong>settings.py</strong> y buscaremos el diccionario llamado <em>DATABASES</em>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<div class="superfences-tabs">
-<input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
-<label for="__tab_3_0">webpersonal/settings.py</label>
-<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="c1"># Database</span>
-<span class="c1"># https://docs.djangoproject.com/en/2.0/ref/settings/#databases</span>
+</div>
+<p>```python tab="webpersonal/settings.py" # Database # https://docs.djangoproject.com/en/2.0/ref/settings/#databases</p>
+<div class="codehilite"><pre><span></span>DATABASES = {
+    &#39;default&#39;: {
+        &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,
+        &#39;NAME&#39;: os.path.join(BASE_DIR, &#39;db.sqlite3&#39;),
+    }
+}
+```
+</pre></div>
 
-<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.sqlite3&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">&#39;db.sqlite3&#39;</span><span class="p">),</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div></div>
-</div>
-</div>
+
 <p>Lo que tenemos aquí es una configuración predeterminada utilizando la base de datos SQLite3. Sí, Django trabaja con bases de datos SQL, y es compatible con unas cuantas. Si accedemos al enlace de la documentación veremos exactamente cuales en el apartado <em>ENGINES</em>:</p>
 <div style="text-align:center;margin-top:25px"><img class="lazy" data-src="/cdn/django/08.png"/></div>
 
 <p>PostgreSQL, MySQL, SQLite3 y Oracle. ¿Y qué pasa con SQL Server de Microsoft? Pues no está soportada por defecto, aunque sí existen módulos externos como Django-MSSQL, pero claro, ya requiere una configuración más avanzada.</p>
-<p>Nosotros vamos a trabajar siempre con bases de datos SQLite3. Este motor se maneja en un fichero y no requiere instalar ningún servidor de base de datos, es lo mejor para ir aprendiendo. </p>
+<p>Nosotros vamos a trabajar siempre con bases de datos SQLite3. Este motor se maneja en un fichero y no requiere instalar ningún servidor de base de datos, es lo mejor para ir aprendiendo.</p>
 <p>La configuración por defecto para utilizar SQLite3 es simplemente el <em>ENGINE</em> y una ruta al directorio donde se creará la base de datos, que por defecto es el directorio principal del proyecto y se llamará <strong>db.sqlite3</strong>. Si os interesa conectar con MySQL, PostgreSQL u Oracle significa que estáis familiarizados con estos sistemas, echad un vistazo al ejemplo de la documentación para conectar PostgreSQL, no cambiará mucho en los otros servidores:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<div class="superfences-tabs">
-<input name="__tabs_4" type="radio" id="__tab_4_0" checked="checked" />
-<label for="__tab_4_0">webpersonal/settings.py</label>
-<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.postgresql&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;mydatabase&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;mydatabaseuser&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;mypassword&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;5432&#39;</span><span class="p">,</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div></div>
 </div>
-</div>
+<p><code>python tab="webpersonal/settings.py" DATABASES = { 'default': { 'ENGINE': 'django.db.backends.postgresql', 'NAME': 'mydatabase', 'USER': 'mydatabaseuser', 'PASSWORD': 'mypassword', 'HOST': '127.0.0.1', 'PORT': '5432', } }</code></p>
 <p>Así pues vamos a sincronizar la base de datos inicialmente, ¿cómo lo hacemos? Pues fijaros que si volvemos a nuestra terminal, justo en el momento que hemos puesto en marcha el servidor nos aparece un mensaje:</p>
 <div style="text-align:center;margin-top:25px"><img class="lazy" data-src="/cdn/django/09.png"/></div>
 
